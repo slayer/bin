@@ -6,12 +6,13 @@ passenger-install-nginx-module --extra-configure-flags="--with-http_gzip_static_
 
 mv /opt/nginx/conf /etc/nginx
 ln -sf /etc/nginx /opt/nginx/conf
-mv /opt/nginx/log /var/log/nginx
+mv /opt/nginx/logs /var/log/nginx
 ln -sf /var/log/nginx /opt/nginx/logs
 
 
 
 
+if [ ! -f /etc/init.d/nginx ]; then
 cat <<\END >/etc/init.d/nginx
 #!/bin/sh
 
@@ -76,4 +77,24 @@ case "$1" in
 
     exit 0
 END
+fi
+
+
+if [ ! -f /etc/logrotate.d/nginx ]; then
+cat <<\END >/etc/logrotate.d/nginx
+/var/log/nginx/*
+{
+  minsize 50M
+  rotate 30
+  daily
+  missingok
+  notifempty
+  delaycompress
+  compress
+  postrotate
+     /etc/init.d/nginx reload >/dev/null 2>&1 || true
+  endscript
+}
+END
+fi
 
