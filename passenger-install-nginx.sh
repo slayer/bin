@@ -1,7 +1,8 @@
-#!/bin/sh
+#!/bin/bash -x
 set -e
 
 rbenv rehash
+gem install passenger
 passenger-install-nginx-module --extra-configure-flags="--with-http_gzip_static_module --with-http_stub_status_module"
 
 mv /opt/nginx/conf /etc/nginx
@@ -10,6 +11,7 @@ mv /opt/nginx/logs /var/log/nginx
 ln -sf /var/log/nginx /opt/nginx/logs
 
 
+echo "pid        /var/run/nginx.pid;" >>/etc/nginx/nginx.conf
 
 
 if [ ! -f /etc/init.d/nginx ]; then
@@ -77,6 +79,7 @@ case "$1" in
 
     exit 0
 END
+  chmod a+x /etc/init.d/nginx
 fi
 
 

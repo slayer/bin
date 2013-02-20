@@ -12,3 +12,5 @@ sudo apt-get install -y autoconf build-essential libxml2-dev libxslt-dev libmysq
 sudo apt-get install -y curl libcurl4-openssl-dev imagemagick libpq-dev libssl-dev zlib1g-dev
 sudo apt-get install -y pwgen stow strace ltrace tcpdump tcpick whois dnsutils
 
+sudo apt-get install -y etckeeper
+
