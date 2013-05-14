@@ -18,7 +18,7 @@ echo 'export PATH="$RBENV_ROOT/bin:$PATH"' >> /etc/profile.d/rbenv.sh
 echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
 
 chmod +x /etc/profile.d/rbenv.sh
-. /etc/profile.d/rbenv.sh
+source /etc/profile.d/rbenv.sh
 
 grep CFLAGS /etc/environment || (
   echo export CFLAGS="-march=native -O3 -pipe -fomit-frame-pointer" >>/etc/environment
@@ -28,10 +28,10 @@ grep CFLAGS /etc/environment || (
 
 # Install ruby-build:
 pushd /tmp
-rm -rf ruby-build
-git clone git://github.com/sstephenson/ruby-build.git
-cd ruby-build
-./install.sh
+	rm -rf ruby-build
+	git clone git://github.com/sstephenson/ruby-build.git
+	cd ruby-build
+	./install.sh
 popd
 
 # Install Ruby 1.9.2-p290:
