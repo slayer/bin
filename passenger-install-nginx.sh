@@ -16,9 +16,9 @@ if [ ! -d /var/log/nginx ]; then
 fi
 
 
-
-echo "pid        /var/run/nginx.pid;" >>/etc/nginx/nginx.conf
-
+if ! grep "^pid" /etc/nginx/nginx.conf >/dev/null 2>&1; then
+	echo "pid        /var/run/nginx.pid;" >>/etc/nginx/nginx.conf
+fi
 
 if [ ! -f /etc/init.d/nginx ]; then
 cat <<\END >/etc/init.d/nginx
