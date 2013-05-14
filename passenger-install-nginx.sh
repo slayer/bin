@@ -52,29 +52,24 @@ set -e
 case "$1" in
   start)
         echo -n "Starting $DESC: "
-        start-stop-daemon --start --quiet --pidfile $PIDFILE \
-                --exec $DAEMON -- $DAEMON_OPTS
+        start-stop-daemon --start --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_OPTS
         echo "$NAME."
         ;;
   stop)
         echo -n "Stopping $DESC: "
-        start-stop-daemon --stop --quiet --pidfile $PIDFILE \
-                --exec $DAEMON
+        start-stop-daemon --stop --pidfile $PIDFILE
         echo "$NAME."
         ;;
   restart|force-reload)
         echo -n "Restarting $DESC: "
-        start-stop-daemon --stop --quiet --pidfile \
-                $PIDFILE --exec $DAEMON
+        start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec $DAEMON
         sleep 1
-        start-stop-daemon --start --quiet --pidfile \
-                $PIDFILE --exec $DAEMON -- $DAEMON_OPTS
+        start-stop-daemon --start --quiet --pidfile $PIDFILE -- $DAEMON_OPTS
         echo "$NAME."
         ;;
   reload)
           echo -n "Reloading $DESC configuration: "
-          start-stop-daemon --stop --signal HUP --quiet --pidfile     $PIDFILE \
-              --exec $DAEMON
+          start-stop-daemon --stop --signal HUP --quiet --pidfile $PIDFILE
           echo "$NAME."
           ;;
       *)
