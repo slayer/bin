@@ -5,10 +5,16 @@ rbenv rehash
 gem install passenger
 passenger-install-nginx-module --extra-configure-flags="--with-http_gzip_static_module --with-http_stub_status_module"
 
-mv /opt/nginx/conf /etc/nginx
-ln -sf /etc/nginx /opt/nginx/conf
-mv /opt/nginx/logs /var/log/nginx
-ln -sf /var/log/nginx /opt/nginx/logs
+if [ ! -d /etc/nginx ]; then
+	mv /opt/nginx/conf /etc/nginx
+	ln -sf /etc/nginx /opt/nginx/conf
+fi
+
+if [ ! -d /var/log/nginx ]; then
+	mv /opt/nginx/logs /var/log/nginx
+	ln -sf /var/log/nginx /opt/nginx/logs
+fi
+
 
 
 echo "pid        /var/run/nginx.pid;" >>/etc/nginx/nginx.conf
