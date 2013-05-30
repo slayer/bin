@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-BASE_PACKAGES="etckeeper tmux colordiff ctags vim dnsutils whois mtr-tiny curl"
+BASE_PACKAGES="etckeeper tmux colordiff ctags vim dnsutils whois mtr-tiny curl pwgen whois stow dnsutils"
 
 apt-get update
 apt-get --force-yes upgrade
