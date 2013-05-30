@@ -8,6 +8,7 @@ locale-gen ru_RU.UTF-8 ru_UA.UTF-8
 apt-get -y install git-core
 
 apt-get -y install $BASE_PACKAGES
+apt-get clean
 
 echo "vlad ALL=NOPASSWD: ALL" >>/etc/sudoers
 
