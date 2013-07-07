@@ -2,7 +2,7 @@
 
 
 echo "## Percona" >>/etc/apt/sources.list
-echo "deb http://repo.percona.com/apt quantal main" >>/etc/apt/sources.list
+echo "deb http://repo.percona.com/apt raring main" >>/etc/apt/sources.list
 
 gpg --keyserver  hkp://keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
 gpg -a --export CD2EFD2A | sudo apt-key add -
