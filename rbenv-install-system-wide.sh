@@ -5,8 +5,7 @@
 # Update, upgrade and install development tools:
 apt-get update
 apt-get -y upgrade
-apt-get -y install build-essential
-apt-get -y install git-core
+apt-get -y install build-essential libssl-dev git-core
 
 DIR=/usr/local/rbenv
 
