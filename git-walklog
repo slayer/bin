@@ -1,0 +1,11 @@
+#!/bin/bash
+
+for sha in `git log --format="%H" $*`; do
+    git log --stat -1 $sha;
+    read ans;
+    if [[ "$ans" == 'n'  ||  "$ans" == 'no' ]]; then
+        echo "skipping $sha"
+    else
+        git difftool $sha^ $sha;
+    fi
+done
