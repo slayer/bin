@@ -8,20 +8,30 @@ apt-get -y upgrade
 apt-get -y install build-essential
 apt-get -y install git-core
 
+DIR=/usr/local/rbenv
+
 # Install rbenv
-git clone git://github.com/sstephenson/rbenv.git /usr/local/rbenv
+git clone git://github.com/sstephenson/rbenv.git $DIR
+
+# rbenv plugins
+mkdir -p ${DIR}/plugins
+git clone https://github.com/sstephenson/rbenv-default-gems.git ${DIR}/plugins/rbenv-default-gems
+echo "bundler" > ${DIR}/default-gems
+git clone https://github.com/ianheggie/rbenv-binstubs.git  ${DIR}/plugins/rbenv-binstubs
 
 # Add rbenv to the path:
-echo '# rbenv setup' > /etc/profile.d/rbenv.sh
-echo 'export RBENV_ROOT=/usr/local/rbenv' >> /etc/profile.d/rbenv.sh
-echo 'export PATH="$RBENV_ROOT/bin:$PATH"' >> /etc/profile.d/rbenv.sh
-echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
+if [ ! -f /etc/profile.d/rbenv.sh ]; then
+	echo '# rbenv setup' > /etc/profile.d/rbenv.sh
+	echo "export RBENV_ROOT=${DIR}" >> /etc/profile.d/rbenv.sh
+	echo 'export PATH="$RBENV_ROOT/bin:$PATH"' >> /etc/profile.d/rbenv.sh
+	echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
+fi
 
 chmod +x /etc/profile.d/rbenv.sh
 source /etc/profile.d/rbenv.sh
 
 grep CFLAGS /etc/environment || (
-  echo export CFLAGS="-march=native -O3 -pipe -fomit-frame-pointer" >>/etc/environment
+  echo export CFLAGS=\"-march=native -O3 -pipe -fomit-frame-pointer\" >>/etc/environment
   echo export RUBY_GC_MALLOC_LIMIT=60000000 >>/etc/environment
   echo export RUBY_FREE_MIN=200000 >>/etc/environment
 )
@@ -34,21 +44,26 @@ pushd /tmp
 	./install.sh
 popd
 
-# Install Ruby 1.9.2-p290:
-# rbenv install 1.9.2-p290
-# rbenv global 1.9.2-p290
+# Install Ruby
+rbenv install 2.0.0-p247
+rbenv global 2.0.0-p247
+
+if [ -d ${DIR}/../bin ]; then
+	pushd ${DIR}/../bin
+		ln -sf ../rbenv/shims/ruby
+		ln -sf ../rbenv/shims/gem
+		ln -sf ../rbenv/shims/bundle
+	popd
+fi
 
 # Rehash:
 rbenv rehash
 gem install bundler
 rbenv rehash
 
-pushd /usr/local/bin
-  ln -sf ../rbenv/shims/gem
-  ln -sf ../rbenv/shims/bundle
-popd
 
-echo "You can install 1.9.3-p327-perf by copypasting"
-echo 'curl https://raw.github.com/gist/1688857/rbenv.sh | sh ; rbenv global 1.9.3-p327-perf'
+
+# echo "You can install 1.9.3-p327-perf by copypasting"
+# echo 'curl https://raw.github.com/gist/1688857/rbenv.sh | sh ; rbenv global 1.9.3-p327-perf'
 
 
