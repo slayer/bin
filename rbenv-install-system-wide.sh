@@ -16,7 +16,7 @@ git clone git://github.com/sstephenson/rbenv.git $DIR
 mkdir -p ${DIR}/plugins
 git clone https://github.com/sstephenson/rbenv-default-gems.git ${DIR}/plugins/rbenv-default-gems
 echo "bundler" > ${DIR}/default-gems
-git clone https://github.com/ianheggie/rbenv-binstubs.git  ${DIR}/plugins/rbenv-binstubs
+# git clone https://github.com/ianheggie/rbenv-binstubs.git  ${DIR}/plugins/rbenv-binstubs
 
 # Add rbenv to the path:
 if [ ! -f /etc/profile.d/rbenv.sh ]; then
