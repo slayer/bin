@@ -13,7 +13,11 @@ apt-get clean
 echo "vlad ALL=NOPASSWD: ALL" >>/etc/sudoers
 
 sed -i 's/^VCS=.*$/VCS=git/' /etc/etckeeper/etckeeper.conf
-pushd /etc
-	etckeeper init && etckeeper commit "initial"
-popd
+cd /etc
+etckeeper init && etckeeper commit "initial"
+
+if [ `readlink /bin/sh` != bash ]; then
+	ln -sf /bin/bash /bin/sh
+fi
+
 
