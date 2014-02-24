@@ -31,8 +31,11 @@ source /etc/profile.d/rbenv.sh
 
 grep CFLAGS /etc/environment || (
   echo export CFLAGS=\"-march=native -O3 -pipe -fomit-frame-pointer\" >>/etc/environment
-  echo export RUBY_GC_MALLOC_LIMIT=60000000 >>/etc/environment
-  echo export RUBY_FREE_MIN=200000 >>/etc/environment
+  echo export RUBY_GC_HEAP_INIT_SLOTS=600000 >>/etc/environment
+  echo export RUBY_GC_HEAP_FREE_SLOTS=600000 >>/etc/environment
+  echo export RUBY_GC_HEAP_GROWTH_FACTOR=1.25 >>/etc/environment
+  echo export RUBY_GC_HEAP_GROWTH_MAX_SLOTS=300000 >>/etc/environment
+
 )
 
 # Install ruby-build:
@@ -44,8 +47,8 @@ pushd /tmp
 popd
 
 # Install Ruby
-rbenv install 2.0.0-p247
-rbenv global 2.0.0-p247
+rbenv install 2.1.1
+rbenv global 2.1.1
 
 if [ -d ${DIR}/../bin ]; then
 	pushd ${DIR}/../bin
