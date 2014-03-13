@@ -1,8 +1,8 @@
 #!/bin/bash -x
 set -e
 
-rbenv rehash
 gem install passenger
+rbenv rehash
 passenger-install-nginx-module --extra-configure-flags="--with-http_gzip_static_module --with-http_stub_status_module"
 
 if [ ! -d /etc/nginx ]; then
