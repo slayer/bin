@@ -64,7 +64,7 @@ case "$1" in
         echo -n "Restarting $DESC: "
         start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec $DAEMON
         sleep 1
-        start-stop-daemon --start --quiet --pidfile $PIDFILE -- $DAEMON_OPTS
+        start-stop-daemon --start --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_OPTS
         echo "$NAME."
         ;;
   reload)
