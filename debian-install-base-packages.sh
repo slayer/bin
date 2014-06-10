@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-BASE_PACKAGES="etckeeper tmux grc colordiff sudo ctags vim dnsutils whois mtr-tiny curl pwgen whois stow dnsutils mbuffer"
+BASE_PACKAGES="etckeeper tmux grc colordiff sudo ctags vim dnsutils whois mtr-tiny curl pwgen whois stow dnsutils mbuffer fail2ban"
 
 apt-get update
 apt-get -y upgrade
