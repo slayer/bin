@@ -38,7 +38,7 @@ PATH=/opt/nginx/sbin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/opt/nginx/sbin/nginx
 NAME=nginx
 DESC=nginx
-PIDFILE=/opt/nginx/logs/nginx.pid
+PIDFILE=/var/run/nginx.pid
 
 test -x $DAEMON || exit 0
 
