@@ -3,12 +3,14 @@ set -e
 
 gem install passenger
 rbenv rehash
-passenger-install-nginx-module --extra-configure-flags="--with-http_gzip_static_module --with-http_stub_status_module"
+passenger-install-nginx-module --extra-configure-flags="--with-http_gzip_static_module --with-http_stub_status_module --with-ipv6"
 
 if [ ! -d /etc/nginx ]; then
 	mv /opt/nginx/conf /etc/nginx
 	ln -sf /etc/nginx /opt/nginx/conf
 fi
+
+mkdir -p /etc/nginx/sites-available /etc/nginx/sites-enabled
 
 if [ ! -d /var/log/nginx ]; then
 	mv /opt/nginx/logs /var/log/nginx
