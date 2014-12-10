@@ -22,7 +22,7 @@ fi
 
 # Auto apt-get upgrade
 if [ `id -u` = 0 -a ! -f /etc/cron.daily/apt-get-upgrade ]; then
-	echo -e "#!/bin/sh\n\napt-get -qq update >/dev/null && apt-get -yqq upgrade" >/etc/cron.daily/apt-get-upgrade
+	echo -e '#!/bin/sh\n\napt-get -qq update >/dev/null && apt-get -yqq upgrade' >/etc/cron.daily/apt-get-upgrade
 	chmod a+x /etc/cron.daily/apt-get-upgrade
 fi
 
