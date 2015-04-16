@@ -1,11 +1,12 @@
 #!/bin/bash -e
 
+VERSION=2.2.0
+
 # forked from https://gist.github.com/1256593
 
 # Update, upgrade and install development tools:
-apt-get update
-apt-get -y upgrade
-apt-get -y install build-essential libssl-dev git-core
+sudo apt-get -y install build-essential libssl-dev git-core
+
 
 DIR=/usr/local/rbenv
 
@@ -17,6 +18,7 @@ mkdir -p ${DIR}/plugins
 git clone https://github.com/sstephenson/rbenv-default-gems.git ${DIR}/plugins/rbenv-default-gems
 echo "bundler" > ${DIR}/default-gems
 # git clone https://github.com/ianheggie/rbenv-binstubs.git  ${DIR}/plugins/rbenv-binstubs
+git clone https://github.com/sstephenson/rbenv-gem-rehash.git ${DIR}/plugins/rbenv-gem-rehash
 
 # Add rbenv to the path:
 if [ ! -f /etc/profile.d/rbenv.sh ]; then
@@ -26,18 +28,8 @@ if [ ! -f /etc/profile.d/rbenv.sh ]; then
 	echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
 fi
 
-chmod +x /etc/profile.d/rbenv.sh
+sudo chmod +x /etc/profile.d/rbenv.sh
 source /etc/profile.d/rbenv.sh
-
-grep CFLAGS /etc/environment || (
-  echo export CFLAGS=\"-march=native -O3 -pipe -fomit-frame-pointer\" >>/etc/environment
-	# echo "######################################"
-  # echo export RUBY_GC_HEAP_INIT_SLOTS=600000 >>/etc/environment
-  # echo export RUBY_GC_HEAP_FREE_SLOTS=600000 >>/etc/environment
-  # echo export RUBY_GC_HEAP_GROWTH_FACTOR=1.25 >>/etc/environment
-  # echo export RUBY_GC_HEAP_GROWTH_MAX_SLOTS=300000 >>/etc/environment
-
-)
 
 # Install ruby-build:
 pushd /tmp
@@ -49,9 +41,10 @@ popd
 
 export CFLAGS="-march=native -O3 -pipe -fomit-frame-pointer"
 
+echo CFLAGS: $CFLAGS
 # Install Ruby
-rbenv install 2.1.2
-rbenv global 2.1.2
+rbenv install $VERSION
+rbenv global $VERSION
 
 if [ -d ${DIR}/../bin ]; then
 	pushd ${DIR}/../bin
