@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 BASE_PACKAGES="etckeeper tmux grc colordiff sudo ctags vim dnsutils whois mtr-tiny curl pwgen whois stow dnsutils mbuffer fail2ban"
 
@@ -22,7 +22,7 @@ fi
 
 # Auto apt-get upgrade
 if [ `id -u` = 0 -a ! -f /etc/cron.daily/apt-get-upgrade ]; then
-	echo -e '#!/bin/sh\n\napt-get -qq update >/dev/null && apt-get -yqq upgrade' >/etc/cron.daily/apt-get-upgrade
+	echo -e '#!/bin/sh\n\napt-get -q update >/dev/null 2>/dev/null && apt-get -yqq upgrade >/dev/null 2>/dev/null' >/etc/cron.daily/apt-get-upgrade
 	chmod a+x /etc/cron.daily/apt-get-upgrade
 fi
 
