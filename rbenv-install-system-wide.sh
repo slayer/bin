@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-VERSION=2.1.4
+VERSION=2.2.5
 
 # forked from https://gist.github.com/1256593
 
@@ -17,7 +17,7 @@ git clone git://github.com/sstephenson/rbenv.git $DIR
 mkdir -p ${DIR}/plugins
 git clone https://github.com/sstephenson/rbenv-default-gems.git ${DIR}/plugins/rbenv-default-gems
 echo "bundler" > ${DIR}/default-gems
-git clone https://github.com/ianheggie/rbenv-binstubs.git  ${DIR}/plugins/rbenv-binstubs
+# git clone https://github.com/ianheggie/rbenv-binstubs.git  ${DIR}/plugins/rbenv-binstubs
 git clone https://github.com/sstephenson/rbenv-gem-rehash.git ${DIR}/plugins/rbenv-gem-rehash
 
 # Add rbenv to the path:
