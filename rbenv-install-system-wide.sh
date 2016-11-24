@@ -5,7 +5,7 @@ VERSION=2.2.5
 # forked from https://gist.github.com/1256593
 
 # Update, upgrade and install development tools:
-sudo apt-get -y install build-essential libssl-dev git-core
+sudo apt-get -y install build-essential libssl-dev git-core  libreadline-dev
 
 
 DIR=/usr/local/rbenv
