@@ -5,16 +5,16 @@ host=$1
 
 echo $host | grep "@" || host=root@${host}
 
-SSH_KEY="`cat ~/.ssh/vlad_rsa.pub`"
+SSH_KEY="`cat ~/.ssh/vlad2_rsa.pub`"
 
 echo "SSH_KEY: ${SSH_KEY}"
 
-ssh ${host} 'bash -xc "which git >/dev/null || sudo apt-get install  -y git;
+ssh ${host} 'bash -c "which git >/dev/null || sudo apt-get install  -y git;
 						[ -d ~/bin ] && (cd ~/bin; git pull) || git clone https://github.com/slayer/bin.git ~/bin;
+						[ -x ~/bin/debian-install-base-packages.sh ] && sudo ~/bin/debian-install-base-packages.sh ;
 						mkdir -p ~/.ssh;
 						grep '\'${SSH_KEY}\'' ~/.ssh/authorized_keys  || echo '\'$SSH_KEY\'' >>~/.ssh/authorized_keys;
 						[ -d ~/bin ] && ~/bin/install-dotfiles.sh ;
-
 						"'
 
 reset
