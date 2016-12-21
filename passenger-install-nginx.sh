@@ -3,7 +3,7 @@ set -e
 
 gem install passenger
 rbenv rehash
-passenger-install-nginx-module --extra-configure-flags="--with-http_gzip_static_module --with-http_stub_status_module --with-ipv6"
+passenger-install-nginx-module --extra-configure-flags="--with-http_gzip_static_module --with-http_stub_status_module --with-ipv6 --with-http_realip_module"
 
 if [ ! -d /etc/nginx ]; then
 	mv /opt/nginx/conf /etc/nginx
