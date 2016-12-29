@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
-BASE_PACKAGES="etckeeper tmux grc colordiff sudo ctags vim dnsutils whois mtr-tiny curl pwgen whois stow dnsutils mbuffer fail2ban htop"
+BASE_PACKAGES="etckeeper tmux grc sudo ctags vim dnsutils whois mtr-tiny curl pwgen whois stow dnsutils htop"
+USEFULL_PACKAGES="pv colordiff mbuffer"
 
 apt-get update
 apt-get -y upgrade
@@ -15,6 +16,11 @@ echo "vlad ALL=NOPASSWD: ALL" >>/etc/sudoers
 sed -i 's/^VCS=.*$/VCS=git/' /etc/etckeeper/etckeeper.conf
 cd /etc
 etckeeper init && etckeeper commit "initial"
+
+if [ `id -u` = 0 ]; then
+  git config --global user.email root@`hostname`
+  git config --global user.name root
+fi
 
 if [ `readlink /bin/sh` != bash ]; then
 	ln -sf /bin/bash /bin/sh
