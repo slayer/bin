@@ -13,10 +13,7 @@ ssh ${opts} ${host} 'bash -c "which git >/dev/null || (sudo="`which sudo`"; $sud
 						[ -d ~/bin ] && (cd ~/bin; git pull) || git clone https://github.com/slayer/bin.git ~/bin;
 						[ -x ~/bin/debian-install-base-packages.sh ] && sudo ~/bin/debian-install-base-packages.sh ;
 						mkdir -p ~/.ssh;
-						grep '\'${SSH_KEY}\'' ~/.ssh/authorized_keys  || echo '\'$SSH_KEY\'' >>~/.ssh/authorized_keys;
+            ( [ -f ~/.ssh/authorized_keys ] && grep '\'${SSH_KEY}\'' ~/.ssh/authorized_keys ) || echo '\'$SSH_KEY\'' >>~/.ssh/authorized_keys;
 						[ -d ~/bin ] && ~/bin/install-dotfiles.sh ;
 						"'
 
-reset
-
-# [ -d ~/dotfiles ] && ( cd ~/dotfiles; git pull ) || git clone https://github.com/slayer/dotfiles.git ~/dotfiles

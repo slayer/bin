@@ -13,4 +13,5 @@ sudo apt-get install shutter
 
 
 
-sudo apt-get install gnome-tweak-tool unity-tweak-tool
+sudo apt-get install gnome-tweak-tool unity-tweak-tool libgnome2-bin
+sudo apt-get install p7zip rar unrar

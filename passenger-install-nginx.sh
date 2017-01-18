@@ -22,68 +22,24 @@ if ! grep "^pid" /etc/nginx/nginx.conf >/dev/null 2>&1; then
 	echo "pid        /var/run/nginx.pid;" >>/etc/nginx/nginx.conf
 fi
 
-if [ ! -f /etc/init.d/nginx ]; then
-cat <<\END >/etc/init.d/nginx
-#!/bin/sh
+if [ ! -f /etc/systemd/system/nginx.service ]; then
+cat <<\END >/etc/systemd/system/nginx.service
+[Unit]
+Description=The NGINX HTTP and reverse proxy server
+After=syslog.target network.target remote-fs.target nss-lookup.target
 
-### BEGIN INIT INFO
-# Provides:          nginx
-# Required-Start:    $all
-# Required-Stop:     $all
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Short-Description: starts the nginx web server
-# Description:       starts nginx using start-stop-daemon
-### END INIT INFO
+[Service]
+Type=forking
+PIDFile=/var/run/nginx.pid
+ExecStartPre=/opt/nginx/sbin/nginx -t
+ExecStart=/opt/nginx/sbin/nginx
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+PrivateTmp=true
 
-PATH=/opt/nginx/sbin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=/opt/nginx/sbin/nginx
-NAME=nginx
-DESC=nginx
-PIDFILE=/var/run/nginx.pid
-
-test -x $DAEMON || exit 0
-
-# Include nginx defaults if available
-if [ -f /etc/default/nginx ] ; then
-        . /etc/default/nginx
-fi
-
-set -e
-
-case "$1" in
-  start)
-        echo -n "Starting $DESC: "
-        start-stop-daemon --start --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_OPTS
-        echo "$NAME."
-        ;;
-  stop)
-        echo -n "Stopping $DESC: "
-        start-stop-daemon --stop --pidfile $PIDFILE
-        echo "$NAME."
-        ;;
-  restart|force-reload)
-        echo -n "Restarting $DESC: "
-        start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec $DAEMON
-        sleep 1
-        start-stop-daemon --start --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_OPTS
-        echo "$NAME."
-        ;;
-  reload)
-          echo -n "Reloading $DESC configuration: "
-          start-stop-daemon --stop --signal HUP --quiet --pidfile $PIDFILE
-          echo "$NAME."
-          ;;
-      *)
-            N=/etc/init.d/$NAME
-            echo "Usage: $N {start|stop|restart|reload|force-reload}" >&2
-            exit 1
-            ;;
-    esac
-
-    exit 0
+[Install]
+WantedBy=multi-user.target
 END
-  chmod a+x /etc/init.d/nginx
 fi
 
 
@@ -99,7 +55,7 @@ cat <<\END >/etc/logrotate.d/nginx
   delaycompress
   compress
   postrotate
-     /etc/init.d/nginx reload >/dev/null 2>&1 || true
+     /opt/nginx/sbin/nginx -s reload >/dev/null 2>&1 || true
   endscript
 }
 END

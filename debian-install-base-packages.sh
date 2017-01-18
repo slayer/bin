@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+user=`whoami`
+
 BASE_PACKAGES="etckeeper tmux grc sudo ctags vim dnsutils whois mtr-tiny curl pwgen whois stow dnsutils htop"
 USEFULL_PACKAGES="pv colordiff mbuffer"
 
@@ -11,7 +13,11 @@ apt-get -y install git-core
 apt-get -y install $BASE_PACKAGES
 apt-get clean
 
-echo "vlad ALL=NOPASSWD: ALL" >>/etc/sudoers
+if [ "$user" != root ]; then
+  echo "$user ALL=NOPASSWD: ALL" >>/etc/sudoers
+else
+  echo "vlad ALL=NOPASSWD: ALL" >>/etc/sudoers
+fi
 
 sed -i 's/^VCS=.*$/VCS=git/' /etc/etckeeper/etckeeper.conf
 cd /etc
