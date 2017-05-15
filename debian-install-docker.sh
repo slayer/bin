@@ -27,6 +27,6 @@ sudo systemctl start docker
 
 sudo usermod -aG docker `whoami`
 
-sudo sed -i 's/DEFAULT_FORWARD_POLICY=.*/DEFAULT_FORWARD_POLICY="ACCEPT"' /etc/default/ufw
+sudo sed -i s/DEFAULT_FORWARD_POLICY=.*/DEFAULT_FORWARD_POLICY="ACCEPT"/ /etc/default/ufw
 sudo ufw reload
 '
