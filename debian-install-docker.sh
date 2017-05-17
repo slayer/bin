@@ -6,7 +6,6 @@ PACKAGES="docker.io python-pip"
 sudo apt-get -y install $PACKAGES
 sudo apt-get clean
 
-
 sudo pip install docker-compose
 
 echo "You may wish to modify /etc/docker/daemon.json:"
@@ -28,5 +27,16 @@ sudo systemctl start docker
 sudo usermod -aG docker `whoami`
 
 sudo sed -i s/DEFAULT_FORWARD_POLICY=.*/DEFAULT_FORWARD_POLICY="ACCEPT"/ /etc/default/ufw
+
+# /etc/ufw/before.rules
+sudo tee -a /etc/ufw/before.rules <<NATRULE
+
+*nat
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING ! -o docker0 -s 172.17.0.0/16 -j MASQUERADE
+COMMIT
+NATRULE
+
+
 sudo ufw reload
 '
