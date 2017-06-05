@@ -22,6 +22,7 @@ git clone https://github.com/sstephenson/rbenv-gem-rehash.git ${DIR}/plugins/rbe
 
 # Add rbenv to the path:
 if [ ! -f /etc/profile.d/rbenv.sh ]; then
+  echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
 	echo '# rbenv setup' > /etc/profile.d/rbenv.sh
 	echo "export RBENV_ROOT=${DIR}" >> /etc/profile.d/rbenv.sh
 	echo 'export PATH="$RBENV_ROOT/bin:$PATH"' >> /etc/profile.d/rbenv.sh
