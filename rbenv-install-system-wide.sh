@@ -44,7 +44,7 @@ popd
 
 echo CFLAGS: $CFLAGS
 # Install Ruby
-rbenv install $VERSION
+CONFIGURE_OPTS="--disable-install-doc" rbenv install $VERSION
 rbenv global $VERSION
 
 if [ -d ${DIR}/../bin ]; then
