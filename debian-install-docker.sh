@@ -33,7 +33,7 @@ sudo tee -a /etc/ufw/before.rules <<NATRULE
 
 *nat
 :POSTROUTING ACCEPT [0:0]
--A POSTROUTING ! -o docker0 -s 172.17.0.0/16 -j MASQUERADE
+-A POSTROUTING ! -o docker0 -s 172.16.0.0/12 -j MASQUERADE
 COMMIT
 NATRULE
 
