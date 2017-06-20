@@ -1,7 +1,9 @@
 #!/bin/sh
 
-apt-get update
-which git >/dev/null || apt-get install -y git
+if [ ! -x `which git` ]; then
+  sudo apt-get update
+  sudo apt-get install -y git
+fi
 
 [ -d ~/bin ] && (cd ~/bin && git pull) || git clone https://github.com/slayer/bin.git ~/bin
 if [ -d ~/dotfiles ]; then
