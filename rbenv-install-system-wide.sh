@@ -8,7 +8,7 @@ VERSION=2.2.5
 sudo apt-get -y install build-essential libssl-dev git-core  libreadline-dev
 
 
-DIR=/usr/local/rbenv
+DIR=/opt/rbenv
 
 # Install rbenv
 git clone git://github.com/sstephenson/rbenv.git $DIR
@@ -47,8 +47,8 @@ echo CFLAGS: $CFLAGS
 CONFIGURE_OPTS="--disable-install-doc" rbenv install $VERSION
 rbenv global $VERSION
 
-if [ -d ${DIR}/../bin ]; then
-	pushd ${DIR}/../bin
+if [ -d /usr/local/bin ]; then
+	pushd /usr/local/bin
 		ln -sf ../rbenv/shims/ruby
 		ln -sf ../rbenv/shims/gem
 		ln -sf ../rbenv/shims/bundle
