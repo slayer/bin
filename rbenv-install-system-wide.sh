@@ -49,9 +49,9 @@ rbenv global $VERSION
 
 if [ -d /usr/local/bin ]; then
 	pushd /usr/local/bin
-		ln -sf ../rbenv/shims/ruby
-		ln -sf ../rbenv/shims/gem
-		ln -sf ../rbenv/shims/bundle
+		ln -sf ${DIR}/shims/ruby
+		ln -sf ${DIR}/shims/gem
+		ln -sf ${DIR}/shims/bundle
 	popd
 fi
 
