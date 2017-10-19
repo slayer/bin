@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-VERSION=2.2.5
+VERSION=2.4.1
 
 # forked from https://gist.github.com/1256593
 
