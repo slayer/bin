@@ -1,0 +1,37 @@
+#!/bin/sh
+
+if [ ! -x $(which lsyncd) ]; then
+  echo "Unable to finr lsyncd; please install via 'apt install lsyncd' or install other way"
+  exit 1
+fi
+
+action="$1"
+remote_host="$2"
+remote_dir="$3"
+pidfile="/tmp/lsyncd-$(pwd | sed 's|/|-|g').pid"
+opts="-delay 1 -log all -pidfile ${pidfile} -rsyncssh " # -nodaemon
+
+stop() { [ -r ${pidfile} ] && { kill "$(cat ${pidfile})"; rm ${pidfile}; } }
+start() {
+  stop
+  [ -z "$remote_host" -o -z "${remote_dir}" ] && usage
+  lsyncd ${opts} . ${remote_host} ${remote_dir}
+}
+
+usage() {
+  cat <<END
+Real-time synchronize current directory with remote
+  Usage:
+    $(basename $0) start [USER@]REMOTE_HOST REMOTE_DIR
+    $(basename $0) stop
+END
+  exit 1
+}
+
+case "$action" in
+  start) start ;;
+  stop) stop ;;
+  *) usage;;
+esac
+
+
