@@ -13,6 +13,7 @@ sudo apt-get install -y strace ltrace tcpdump tcpick whois
 sudo apt-get install -y ack-grep
 sudo apt-get install -y libmysqlclient-dev sqlite3 libsqlite3-dev # libmariadbclient-dev
 sudo apt-get install -y etckeeper inotify-tools entr
+sudo apt install -y postgresql-client
 
 # sudo apt-get install -y libmagickcore-dev libmagick++-dev imagemagick
 

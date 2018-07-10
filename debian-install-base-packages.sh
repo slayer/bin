@@ -33,9 +33,9 @@ if [ `readlink /bin/sh` != bash ]; then
 fi
 
 # Auto apt-get upgrade
-if [ `id -u` = 0 -a ! -f /etc/cron.daily/apt-get-upgrade ]; then
-	echo -e '#!/bin/sh\n\nexport DEBIAN_FRONTEND=noninteractive \napt-get -q update >/dev/null 2>/dev/null && apt-get -yqq upgrade >/dev/null 2>/dev/null' >/etc/cron.daily/apt-get-upgrade
-	chmod a+x /etc/cron.daily/apt-get-upgrade
+if [ `id -u` = 0 -a ! -f /etc/cron.daily/apt-upgrade ]; then
+	echo -e '#!/bin/sh\n\nexport DEBIAN_FRONTEND=noninteractive \napt -qqq update >/dev/null 2>/dev/null && apt -yqqq upgrade >/dev/null 2>/dev/null' >/etc/cron.daily/apt-upgrade
+	chmod a+x /etc/cron.daily/apt-upgrade
 fi
 
 

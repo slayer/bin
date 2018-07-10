@@ -13,5 +13,9 @@ sudo apt-get install shutter
 
 
 
-sudo apt-get install gnome-tweak-tool unity-tweak-tool libgnome2-bin
-sudo apt-get install p7zip rar unrar
+# sudo apt-get install gnome-tweak-tool unity-tweak-tool libgnome2-bin
+sudo apt install -y p7zip rar unrar
+sudo apt install -y openvpn oathtool
+sudo apt install -y pidgin pidgin-otr pidgin-libnotify
+sudo apt install -y xserver-xorg-input-synaptics
+sudo apt install -y fonts-powerline
