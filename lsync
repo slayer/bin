@@ -8,6 +8,7 @@ fi
 action="$1"
 remote_host="$2"
 remote_dir="$3"
+local=${4:-'.'}
 pidfile="/tmp/lsyncd-$(pwd | sed 's|/|-|g').pid"
 opts="-delay 1 -log all -pidfile ${pidfile} -rsyncssh " # -nodaemon
 
@@ -15,7 +16,7 @@ stop() { [ -r ${pidfile} ] && { kill "$(cat ${pidfile})"; rm ${pidfile}; } }
 start() {
   stop
   [ -z "$remote_host" -o -z "${remote_dir}" ] && usage
-  lsyncd ${opts} . ${remote_host} ${remote_dir}
+  lsyncd ${opts} ${local} ${remote_host} ${remote_dir}
 }
 
 usage() {
