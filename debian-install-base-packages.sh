@@ -58,6 +58,6 @@ END
 	chmod a+x /etc/cron.daily/dpkg-get-selections
 fi
 
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
+# git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
 
