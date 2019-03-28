@@ -4,7 +4,7 @@ user=`whoami`
 
 BASE_PACKAGES="etckeeper tmux grc sudo ctags vim dnsutils whois mtr-tiny curl pwgen whois stow "
 BASE_PACKAGES="${BASE_PACKAGES} dnsutils htop iputils-ping pbzip2"
-USEFULL_PACKAGES="pv colordiff mbuffer silversearcher-ag"
+USEFULL_PACKAGES="pv colordiff mbuffer silversearcher-ag ncdu"
 
 apt-get update
 apt-get -y upgrade
@@ -25,8 +25,8 @@ cd /etc
 etckeeper init && etckeeper commit "initial"
 
 if [ `id -u` = 0 ]; then
-  git config --global user.email root@`hostname`
-  git config --global user.name root
+  git config --global user.email root@`hostname`  || true
+  git config --global user.name root || true
 fi
 
 if [ `readlink /bin/sh` != bash ]; then
