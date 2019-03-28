@@ -22,7 +22,7 @@ fi
 
 sed -i 's/^VCS=.*$/VCS=git/' /etc/etckeeper/etckeeper.conf
 cd /etc
-etckeeper init && etckeeper commit "initial"
+etckeeper init && etckeeper commit "initial" || echo "etckeeper fail"
 
 if [ `id -u` = 0 ]; then
   git config --global user.email root@`hostname`  || true
