@@ -17,4 +17,8 @@ sudo apt install -y postgresql-client
 
 # sudo apt-get install -y libmagickcore-dev libmagick++-dev imagemagick
 
+# pspg - table pager for mysql and psql
+# highlight - highlight syntax
+sudo apt install -y pspg highlight
+
 sudo apt-get clean
