@@ -1,10 +1,11 @@
 #!/bin/bash -e
 
 user=`whoami`
+export DEBIAN_FRONTEND=noninteractive
 
 BASE_PACKAGES="etckeeper tmux grc sudo ctags vim dnsutils whois mtr-tiny curl pwgen whois stow "
-BASE_PACKAGES="${BASE_PACKAGES} dnsutils htop iputils-ping pbzip2"
-USEFULL_PACKAGES="pv colordiff mbuffer silversearcher-ag ncdu"
+BASE_PACKAGES="${BASE_PACKAGES} dnsutils htop iputils-ping pbzip2 rsync"
+USEFULL_PACKAGES="pv colordiff mbuffer silversearcher-ag ncdu moreutils"
 
 apt-get update
 apt-get -y upgrade
