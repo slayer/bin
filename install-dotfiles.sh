@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ ! -x `which git` ]; then
   sudo apt-get update

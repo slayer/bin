@@ -24,4 +24,5 @@ sudo apt install -y fonts-powerline
 # gtk-chtheme
 #sudo apt-get install lxappearance gtk-chtheme qt4-qtconfig
 # redshift redshift-gtk
+apt install -y xdotool xvkbd
 
