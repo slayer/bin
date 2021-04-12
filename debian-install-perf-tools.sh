@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo apt-get install -y atop htop iotop ioping fio sysbench
+sudo apt-get install -y atop htop iotop ioping fio sysbench sysstat
 sudo apt-get install -y powertop itop
 
 # Networking

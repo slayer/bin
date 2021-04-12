@@ -4,8 +4,8 @@ user=`whoami`
 export DEBIAN_FRONTEND=noninteractive
 
 BASE_PACKAGES="etckeeper tmux grc sudo ctags vim dnsutils whois mtr-tiny curl pwgen whois stow "
-BASE_PACKAGES="${BASE_PACKAGES} dnsutils htop iputils-ping pbzip2 rsync"
-USEFULL_PACKAGES="pv colordiff mbuffer silversearcher-ag ncdu moreutils"
+BASE_PACKAGES="${BASE_PACKAGES} dnsutils htop iputils-ping pbzip2 rsync dialog fzf"
+USEFULL_PACKAGES="pv colordiff mbuffer silversearcher-ag ncdu moreutils cpulimit"
 
 apt-get update
 apt-get -y upgrade
