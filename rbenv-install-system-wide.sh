@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-VERSION=2.4.1
+VERSION=2.7.3
 
 # forked from https://gist.github.com/1256593
 
@@ -8,10 +8,10 @@ VERSION=2.4.1
 sudo apt-get -y install build-essential libssl-dev git-core  libreadline-dev
 
 
-DIR=/opt/rbenv
+DIR=/usr/local/rbenv
 
 # Install rbenv
-git clone git://github.com/sstephenson/rbenv.git $DIR
+git clone git://github.com/rbenv/rbenv.git $DIR
 
 # rbenv plugins
 mkdir -p ${DIR}/plugins

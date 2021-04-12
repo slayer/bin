@@ -1,0 +1,9 @@
+ssh-askpass
+openssh-server
+redis-server
+pbzip2
+ffmpeg
+postgresql-client
+htop
+
+xdotool
