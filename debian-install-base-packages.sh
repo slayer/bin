@@ -18,7 +18,7 @@ apt-get -y install $BASE_PACKAGES
 # install packages sequentally because some of them can absent in some distributives
 OPTIONAL_PKGS='exa bat'
 for pkg in ${OPTIONAL_PKGS}; do
-  apt-get install $pkg
+  apt-get install -y $pkg
 done
 apt-get clean
 
