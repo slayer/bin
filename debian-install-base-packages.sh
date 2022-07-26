@@ -3,7 +3,7 @@
 user=`whoami`
 export DEBIAN_FRONTEND=noninteractive
 
-BASE_PACKAGES="etckeeper tmux grc sudo ctags vim dnsutils whois mtr-tiny curl pwgen whois stow "
+BASE_PACKAGES="etckeeper tmux grc sudo vim dnsutils whois mtr-tiny curl pwgen whois stow net-tools"
 BASE_PACKAGES="${BASE_PACKAGES} dnsutils htop iputils-ping pbzip2 rsync dialog fzf"
 USEFULL_PACKAGES="pv colordiff mbuffer silversearcher-ag ncdu moreutils cpulimit"
 
@@ -13,6 +13,13 @@ which locale-gen && locale-gen ru_RU.UTF-8 ru_UA.UTF-8 uk_UA.UTF-8
 apt-get -y install git-core
 
 apt-get -y install $BASE_PACKAGES
+
+# optional usefull packages
+# install packages sequentally because some of them can absent in some distributives
+OPTIONAL_PKGS='exa bat'
+for pkg in ${OPTIONAL_PKGS}; do
+  apt-get install $pkg
+done
 apt-get clean
 
 if [ "$user" != root ]; then
